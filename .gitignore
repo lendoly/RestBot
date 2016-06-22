@@ -90,3 +90,9 @@ ENV/
 
 # Pycharm files
 /.idea/*
+
+# Security files
+security.py
+
+# DataBase
+*.db
