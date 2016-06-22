@@ -89,7 +89,7 @@ ENV/
 .ropeproject
 
 # Pycharm files
-/.idea/*
+.idea/*
 
 # Security files
 security.py
