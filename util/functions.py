@@ -1,4 +1,4 @@
-from User.models import User
+from user.models import User
 
 
 def initialize_database():

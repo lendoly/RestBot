@@ -3,8 +3,8 @@ import sqlite3
 
 from settings import KeyBot
 
-from Utils.functions import initialize_database
-from User.models import User
+from util.functions import initialize_database
+from user.models import User
 
 initialize_database()
 bot = telebot.TeleBot(KeyBot)
