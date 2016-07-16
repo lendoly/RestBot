@@ -1,4 +1,4 @@
-from Utils.models import DateModificationModelMixin, DataBaseConnection
+from util.models import DateModificationModelMixin, DataBaseConnection
 
 
 class User(DateModificationModelMixin):
