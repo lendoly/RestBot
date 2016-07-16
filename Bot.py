@@ -1,7 +1,7 @@
 import telebot
 import sqlite3
 
-from security import KeyBot
+from settings import KeyBot
 
 from Utils.functions import initialize_database
 from User.models import User

@@ -2,7 +2,7 @@ import datetime
 import sqlite3
 import logging
 
-from security import database
+from settings import database
 
 
 class DateCreationModelMixin(object):
