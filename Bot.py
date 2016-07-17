@@ -1,12 +1,9 @@
 import telebot
-import sqlite3
 
 from settings import KeyBot
 
-from util.functions import initialize_database
 from user.models import User
 
-initialize_database()
 bot = telebot.TeleBot(KeyBot)
 
 user_bot = bot.get_me()
@@ -15,15 +12,14 @@ user_bot = bot.get_me()
 def start(message):
     bot_user = message.from_user
     user = User(bot_user.first_name, bot_user.last_name, bot_user.username, bot_user.id)
-    try:
-        user.save()
-    except sqlite3.IntegrityError:
-        user.update()
-    bot.send_message(message.chat.id, "Hi, I'm RestIntBot your personal Bot for schedule dinners!")
+    user.save()
+
+    bot.send_message(message.chat.id,
+                     "Hi {}, I'm RestIntBot your personal Bot for schedule dinners!".format(user.username))
 
 
 def test_start(message):
-    return message.text == 'start'
+    return message.text.lower() == 'start'
 
 
 @bot.message_handler(func=test_start)

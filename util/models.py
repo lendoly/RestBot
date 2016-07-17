@@ -1,6 +1,6 @@
 import datetime
+import dataset
 import sqlite3
-import logging
 
 from settings import database
 
@@ -49,24 +49,22 @@ class DataBaseConnection(object):
     """
 
     @classmethod
-    def execute_create_query(cls, query):
-        conn = sqlite3.connect(database)
-        c = conn.cursor()
+    def save_data(cls, table, data, update_keys=None):
+        """
+        Store data on the table that is given by params
+        :param table: table where store the data
+        :type table: str
+        :param data: data to store on database
+        :type data: dict
+        :param update_keys: keys for update if the instance exists
+        :type update_keys: list
+        :return: None
+        """
+        db = dataset.connect('sqlite:///{}'.format(database))
+        table = db[table]
         try:
-            c.execute(query)
-            conn.commit()
-        except sqlite3.OperationalError as e:
-            logging.warning(e.message)
-        conn.close()
-
-    @classmethod
-    def execute_save_query(cls, query, data):
-        conn = sqlite3.connect(database)
-        c = conn.cursor()
-        try:
-            c.execute(query, data)
-            conn.commit()
-        except BaseException as e:
-            conn.close()
-            raise
-
+            table.insert(data)
+        except sqlite3.IntegrityError as e:
+            print e
+            data.pop('creation_date')
+            table.update(data, update_keys)
