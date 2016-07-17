@@ -6,7 +6,11 @@ from user.models import User
 
 bot = telebot.TeleBot(KeyBot)
 
-user_bot = bot.get_me()
+help_message = '''
+    RestBot is a Bot for help you and your to find a place for dinner/lunch or simply take a break
+    The possibles commands are:
+        /start
+'''
 
 
 def start(message):
@@ -34,7 +38,7 @@ def send_help(message):
 
 @bot.message_handler(commands=['help'])
 def send_help(message):
-    bot.reply_to(message, 'Help is comming')
+    bot.reply_to(message, help_message)
 
 
 @bot.message_handler(func=lambda m: True)

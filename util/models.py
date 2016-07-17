@@ -64,7 +64,7 @@ class DataBaseConnection(object):
         table = db[table]
         try:
             table.insert(data)
-        except sqlite3.IntegrityError as e:
+        except BaseException as e:
             print e
             data.pop('creation_date')
             table.update(data, update_keys)
